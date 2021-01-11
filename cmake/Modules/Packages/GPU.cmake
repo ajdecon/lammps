@@ -63,9 +63,9 @@ if(PKG_GPU)
         string(APPEND GPU_CUDA_GENCODE "-gencode arch=compute_20,code=[sm_20,compute_20] ")
       endif()
       # Kepler (GPU Arch 3.x) is supported by CUDA 5 and later
-      if(CUDA_VERSION VERSION_GREATER "4.9")
-        string(APPEND GPU_CUDA_GENCODE "-gencode arch=compute_30,code=[sm_30,compute_30] -gencode arch=compute_35,code=[sm_35,compute_35] ")
-      endif()
+      #if(CUDA_VERSION VERSION_GREATER "4.9")
+      #  string(APPEND GPU_CUDA_GENCODE "-gencode arch=compute_30,code=[sm_30,compute_30] -gencode arch=compute_35,code=[sm_35,compute_35] ")
+      #endif()
       # Maxwell (GPU Arch 5.x) is supported by CUDA 6 and later
       if(CUDA_VERSION VERSION_GREATER "5.9")
         string(APPEND GPU_CUDA_GENCODE "-gencode arch=compute_50,code=[sm_50,compute_50] -gencode arch=compute_52,code=[sm_52,compute_52] ")
@@ -81,6 +81,10 @@ if(PKG_GPU)
       # Turing (GPU Arch 7.5) is supported by CUDA 10 and later
       if(CUDA_VERSION VERSION_GREATER "9.9")
         string(APPEND GPU_CUDA_GENCODE "-gencode arch=compute_75,code=[sm_75,compute_75] ")
+      endif()
+      # Ampere (GPU Arch 8.0) is supported by CUDA 11 and later
+      if(CUDA_VERSION VERSION_GREATER "10.9")
+	string(APPEND GPU_CUDA_GENCODE "-gencode arch=compute_80,code=[sm_80,compute_80] ")
       endif()
 
       cuda_compile_fatbin(GPU_GEN_OBJS ${GPU_LIB_CU} OPTIONS
